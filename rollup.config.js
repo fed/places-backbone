@@ -2,18 +2,21 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 
-// `npm run build` -> `production` is true
-// `npm run dev` -> `production` is false
+// `yarn build` -> `production` is true
+// `yarn dev` -> `production` is false
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-	entry: 'src/main.js',
-	dest: 'public/bundle.js',
-	format: 'iife', // immediately-invoked function expression — suitable for <script> tags
+  input: 'src/index.js',
+  output: {
+    file: 'public/bundle.js',
+    format: 'iife', // immediately-invoked function expression — suitable for <script> tags
+    name: 'App',
+    sourcemap: true
+  },
 	plugins: [
-		resolve(), // tells Rollup how to find date-fns in node_modules
-		commonjs(), // converts date-fns to ES modules
+		resolve(), // tells Rollup how to find packages within node_modules
+		commonjs(), // converts node modules to ES modules
 		production && uglify() // minify, but only in production
-	],
-	sourceMap: true
+	]
 };

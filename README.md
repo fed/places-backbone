@@ -1,29 +1,19 @@
-# rollup-starter-app
+# Places App (Backbone.js Remake)
 
-This repo contains a bare-bones example of how to create an application using Rollup, including importing a module from `node_modules` and converting it from CommonJS.
+## Prerequisites
 
-*See also https://github.com/rollup/rollup-starter-lib*
+* Node.js (https://nodejs.org/)
+* Yarn (https://yarnpkg.com/)
 
+## Development Tasks
 
-## Getting started
+| Command | Description |
+|---------|-------------|
+| `yarn install` | Fetch dependencies and build binaries for any of the modules |
+| `yarn start` | Run the app in development mode with live reload on `http://localhost:6789` |
+| `yarn build` | Generate an optimised, production-ready `build` folder |
+| `yarn test` | Run test suite in the interactive watch mode |
 
-Clone this repository and install its dependencies:
+## CI/CD
 
-```bash
-git clone https://github.com/rollup/rollup-starter-app
-cd rollup-starter-app
-npm install
-```
-
-The `public/index.html` file contains a `<script src='bundle.js'>` tag, which means we need to create `public/bundle.js`. The `rollup.config.js` file tells Rollup how to create this bundle, starting with `src/main.js` and including all its dependencies, including [date-fns](https://date-fns.org).
-
-`npm run build` builds the application to `public/bundle.js`, along with a sourcemap file for debugging.
-
-`npm start` launches a server, using [serve](https://github.com/zeit/serve). Navigate to [localhost:5000](http://localhost:5000).
-
-`npm run dev` (run it in a separate terminal to `npm start`) will continually rebuild the application as your source files change, using [rollup-watch](https://github.com/rollup/rollup-watch).
-
-
-## License
-
-[MIT](LICENSE).
+All commits to `master` trigger a deployment to the **production environment** (https://places.surge.sh), provided all tests pass.
