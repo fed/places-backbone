@@ -9,20 +9,38 @@ body {
 
 .Places {
   list-style-type: none;
-  margin: 0;
   padding-left: 0;
+  width: 768px;
+  margin: 0 auto;
 }
 
 .Place {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.Place__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.Place__link:hover .Place__content {
+  background-color: #ffecb3;
+}
+
+.Place__content {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;
-  max-width: 500px;
   padding: 20px;
 }
 
 .Place__title {
   margin-top: 0;
+}
+
+.Place__description {
+  line-height: 1.5;
 }
 
 .Place__links {

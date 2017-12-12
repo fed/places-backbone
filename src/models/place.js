@@ -5,10 +5,14 @@ export default Backbone.Model.extend({
   // initialize: function () {
   //   console.log('init);
   // },
-  // defaults: {
-  //   attachments: []
-  // },
-  markAsVisited() {
-    this.set({ visited: true });
+
+  defaults: {
+    visited: false,
+    images: [],
+    links: []
+  },
+
+  toggle() {
+    this.set({ visited: !this.get('visited') });
   }
 });

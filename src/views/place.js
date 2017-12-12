@@ -1,68 +1,72 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
-import {MAPS_API_KEY} from '../utils/constants';
+import _ from 'underscore';
 
 export default Backbone.View.extend({
-  renderLinks() {
-    const links = this.model.get('attachments')
-      .filter(attachment => attachment.type === 'link')
-      .map(link => `<li><a href="${link.url}">${link.url}</a></li>`);
+  // The DOM element for a todo item is a list item
+  // tagName: 'li',
 
-    if (links.length > 0) {
-      return `
-        <p>Useful links:</p>
-        <ul class="Place__links">
-          ${links}
-        </ul>
-      `;
+  // ... with a class of "Place"
+  // className: 'Place',
+
+  // Cache the template function for a single item.
+  template: _.template($('#item-template').html()),
+
+  // The DOM events specific to an item.
+  events: {
+    'click .toggle': 'toggleVisited',
+    'dblclick .view': 'edit',
+    'click a.destroy': 'clear',
+    'keypress .edit': 'updateOnEnter',
+    'blur .edit': 'close'
+  },
+
+  // The TodoView listens for changes to its model, re-rendering.
+  // Since there’s a one-to-one correspondence between a Place and a PlaceView
+  // in this app, we set a direct reference on the model for convenience.
+  initialize() {
+    this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.model, 'destroy', this.remove);
+  },
+
+  // Toggle the "visited" state of the model.
+  toggleVisited() {
+    this.model.toggle();
+  },
+
+  // Switch this view into "editing" mode, displaying the input field.
+  edit() {
+    this.$el.addClass('editing');
+    this.input.focus();
+  },
+
+  // Close the "editing" mode, saving changes to the todo.
+  close() {
+    var value = this.input.val();
+    if (!value) {
+      this.clear();
     } else {
-      return `<div />`;
+      this.model.save({ title: value });
+      this.$el.removeClass('editing');
     }
   },
 
-  renderImages() {
-    const altText = this.model.get('name');
-    const images = this.model.get('attachments')
-      .filter(attachment => attachment.type === 'image')
-      .map(image => `<li><img src="${image.url}" alt="${altText}" /></li>`);
-
-    if (images.length > 0) {
-      return `
-        <p>Some images:</p>
-        <ul class="Place__images">
-          ${images}
-        </ul>
-      `;
-    } else {
-      return `<div />`;
-    }
+  // If you hit enter, we’re done editing the item.
+  updateOnEnter(e) {
+    if (e.keyCode == 13) this.close();
   },
 
-  render() {
-    const location = this.model.get('location');
-    const html = `
-      <article class="Place">
-        <h1 class="Place__title">${this.model.get('name')}</h1>
-        <p>${this.model.get('description')}</p>
-        <div class="Place__map">
-          <iframe
-            width="100%"
-            height="280px"
-            frameborder="0"
-            src="https://www.google.com/maps/embed/v1/view?key=${MAPS_API_KEY}&center=${location.lat},${location.lng}&zoom=6"
-            allowfullscreen>
-          </iframe>
-        </div>
-        ${this.renderImages()}
-        ${this.renderLinks()}
-        <ul class="Place__controls">
-          <li><button>Mark as visited</button></li>
-          <li><button>Edit</button></li>
-          <li><button>Delete</button></li>
-        </ul>
-      </article>
-    `;
+  // Remove the item, destroy the model.
+  clear: function() {
+    this.model.destroy();
+  },
 
-    $(this.el).html(html);
+  // Re-render the titles of the item.
+  render: function() {
+    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.toggleClass('visited', this.model.get('visited'));
+    this.input = this.$('.edit');
+
+    return this;
   }
 });

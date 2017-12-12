@@ -1,19 +1,72 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#1b1b1b">
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="styles.css" />
-    <title>Places App (Backbone.js Remake)</title>
-  </head>
-  <body>
-    <h1>Places App (Backbone.js Remake)</h1>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="app"></div>
-    <script src="bundle.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#1b1b1b">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles.css" />
+  <title>Places App (Backbone.js Remake)</title>
+</head>
+
+<body>
+  <h1>Places App (Backbone.js Remake)</h1>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="app"></div>
+
+  <script type="text/template" id="item-template">
+    <li class="Place">
+      <a href="place/<%= id %>" class="Place__link">
+        <article class="Place__content">
+          <h1 class="Place__title"><%= name %></h1>
+          <p class="Place__description"><%= description %></p>
+
+          <div class="Place__map">
+            <iframe
+              width="100%"
+              height="280px"
+              frameborder="0"
+              src="https://www.google.com/maps/embed/v1/view?key=AIzaSyCGIqQJgWZVayaoITXuNDeLZFEKZaePo3o&center=<%= lat %>,<%= lng %>&zoom=6"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <% if (images.length > 0) { %>
+            <p>Some images:</p>
+            <ul class="Place__images">
+              <% _(images).each(image => { %>
+                <li><img src=<%= image %>" alt="" /></li>
+              <% }); %>
+            </ul>
+          <% } %>
+
+          <% if (links.length > 0) { %>
+          <p>Useful links:</p>
+          <ul class="Place__links">
+            <% _(links).each(link => { %>
+              <li><a href="<%= link %>" target="_blank"><%= link %></a></li>
+            <% }); %>
+          </ul>
+          <% } %>
+
+          <ul class="Place__controls">
+            <li><button>Toggle state</button></li>
+            <li><button>Edit</button></li>
+            <li><button>Delete</button></li>
+          </ul>
+        </article>
+      </a>
+    </li>
+  </script>
+
+  <script type="text/template" id="list-template">
+    <ul class="Places"></ul>
+  </script>
+
+  <script src="bundle.js"></script>
+</body>
+
 </html>

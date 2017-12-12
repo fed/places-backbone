@@ -1,8 +1,9 @@
-import Backbone from 'backbone';
 import $ from 'jquery';
-import {MAPS_API_KEY, GET_PLACES_ENDPOINT} from './utils/constants';
-import PlacesCollection from './collections/places';
 import PlacesView from './views/places';
+
+// TodoMVC Example:
+// http://backbonejs.org/docs/todos.html (annotated source)
+// https://github.com/tastejs/todomvc/tree/gh-pages/examples/backbone
 
 // Selectors
 const $app = $('#app');
