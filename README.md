@@ -1,4 +1,6 @@
-# Places App (Backbone.js Remake)
+# Places App
+
+This is a remake of my [Places App](https://places.fknussel.com) built using [Backbone.js](https://backbonejs.org/) and following this [tutorial](https://youtu.be/FZSjvWtUxYk).
 
 ## Prerequisites
 
@@ -13,7 +15,3 @@
 | `yarn start` | Run the app in development mode with live reload on `http://localhost:6789` |
 | `yarn build` | Generate an optimised, production-ready `build` folder |
 | `yarn test` | Run test suite in the interactive watch mode |
-
-## CI/CD
-
-All commits to `master` trigger a deployment to the **production environment** (https://places.surge.sh), provided all tests pass.

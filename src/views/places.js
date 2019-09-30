@@ -1,39 +1,29 @@
 import Backbone from 'backbone';
-import $ from 'jquery';
 import _ from 'underscore';
-import Place from '../models/place';
 import Places from '../collections/places';
-import PlaceView from '../views/place';
+import placesTpl from '../templates/places.tpl';
 
 export default Backbone.View.extend({
+    el: '#root',
+
     initialize() {
+        /*
+         * Alternatively, we could also do the following:
+         * this.collection.on('reset', this.render.bind(this));
+         * this.collection.fetch({ reset: true });
+         */
         this.collection = new Places();
-        this.collection.on('reset', this.render.bind(this));
-        this.collection.fetch({ reset: true });
-    },
-
-    renderPlaces() {
-        return this.collection.toJSON().map(data => {
-            const placeModelInstance = new Place(data);
-            const placeView = new PlaceView({ model: placeModelInstance });
-
-            placeView.render();
-
-            return $(placeView.el).html();
+        this.collection.fetch({
+            success: this.render.bind(this)
         });
     },
 
     render() {
-        if (this.collection.toJSON().length === 0) {
-            $(this.el).html('<p>Cargando...</p>');
-        } else {
-            const html = `
-        <ul class="Places">
-          ${this.renderPlaces()}
-        </ul>
-      `;
+        const compiledTemplate = _.template(placesTpl);
+        const markup = compiledTemplate({
+            places: this.collection.models
+        });
 
-            $(this.el).html(html);
-        }
+        this.$el.html(markup);
     }
 });

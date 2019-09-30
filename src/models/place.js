@@ -1,18 +1,23 @@
 import Backbone from 'backbone';
 
-// `Model.extend` sets up the prototype chain
-export default Backbone.Model.extend({
-    // initialize: function () {
-    //   console.log('init);
-    // },
+/*
+ * Backbone.Model: Models are the heart of any JavaScript application,
+ * containing the interactive data as well as a large part of the logic surrounding it:
+ * conversions, validations, computed properties, and access control.
+ * You extend Backbone.Model with your domain-specific methods,
+ * and Model provides a basic set of functionality for managing changes.
+ */
 
+export default Backbone.Model.extend({
     defaults: {
         visited: false,
         images: [],
         links: []
     },
 
-    toggle() {
-        this.set({ visited: !this.get('visited') });
+    toggleVisited() {
+        this.set({
+            visited: !this.get('visited')
+        });
     }
 });
