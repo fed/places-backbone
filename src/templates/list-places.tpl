@@ -1,3 +1,7 @@
+<% if (places.length === 0) { %>
+    <p>Fetching places...</p>
+<% } %>
+
 <ul class="places">
     <% _.each(places, function (place) { %>
         <li class="place">
