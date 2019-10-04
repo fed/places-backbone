@@ -1,4 +1,5 @@
 import Backbone from 'backbone';
+import { PLACES_ENDPOINT } from '../utils/constants';
 
 /*
  * Backbone.Model: Models are the heart of any JavaScript application,
@@ -9,10 +10,15 @@ import Backbone from 'backbone';
  */
 
 export default Backbone.Model.extend({
+    urlRoot: PLACES_ENDPOINT,
+
     defaults: {
         visited: false,
-        images: [],
-        links: []
+        attachments: [],
+        location: {
+            lat: null,
+            lng: null
+        }
     },
 
     toggleVisited() {

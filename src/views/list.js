@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
 import _ from 'underscore';
 import Places from '../collections/places';
-import placesTpl from '../templates/places.tpl';
+import listPlacesTpl from '../templates/list-places.tpl';
 
 export default Backbone.View.extend({
     el: '#root',
@@ -9,17 +9,19 @@ export default Backbone.View.extend({
     initialize() {
         /*
          * Alternatively, we could also do the following:
-         * this.collection.on('reset', this.render.bind(this));
-         * this.collection.fetch({ reset: true });
+         * this.collection.fetch({ success: this.render.bind(this) });
          */
         this.collection = new Places();
-        this.collection.fetch({
-            success: this.render.bind(this)
-        });
+        this.collection.on('reset', this.render.bind(this));
+        this.collection.fetch({ reset: true });
+    },
+
+    update() {
+        this.collection.fetch({ reset: true });
     },
 
     render() {
-        const compiledTemplate = _.template(placesTpl);
+        const compiledTemplate = _.template(listPlacesTpl);
         const markup = compiledTemplate({
             places: this.collection.models
         });

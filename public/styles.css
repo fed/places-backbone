@@ -7,70 +7,168 @@ body {
     padding: 20px;
 }
 
-.Places {
+.menu {
+    margin-bottom: 40px;
+}
+
+.menu__list {
     list-style-type: none;
     padding-left: 0;
-    width: 768px;
-    margin: 0 auto;
 }
 
-.Place {
-    display: block;
-    margin-bottom: 20px;
+.menu__list-item {
+    display: inline-block;
 }
 
-.Place__link {
-    color: inherit;
+.menu__list-item:not(:last-child) {
+    margin-right: 14px;
+}
+
+.menu__link {
+    background-color: #056cc1;
+}
+
+.button {
+    border-style: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 35px;
     text-decoration: none;
 }
 
-.Place__link:hover .Place__content {
-    background-color: #ffecb3;
+.button:hover {
+    opacity: 0.8;
 }
 
-.Place__content {
+.places {
+    list-style-type: none;
+    padding-left: 0;
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+.place {
+    display: block;
+    margin-bottom: 24px;
+}
+
+.place__link {
+    color: inherit;
+    display: block;
+    text-decoration: none;
+}
+
+.place__link:hover .place__content {
+    border: 1px solid #056cc1;
+    box-shadow: 0px 0px 5px #056cc1;
+}
+
+.place__content {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 20px;
 }
 
-.Place__title {
-    margin-top: 0;
+.place__title {
+    margin: 0 0 10px;
 }
 
-.Place__description {
+.place__description {
     line-height: 1.5;
-}
-
-.Place__links {
     margin: 0;
 }
 
-.Place__images {
+.place__links {
+    margin: 0;
+}
+
+.place__images {
     list-style-type: none;
     margin: 0;
     padding-left: 0;
 }
 
-.Place__images li:not(:first-child) {
+.place__images li:not(:first-child) {
     margin-top: 20px;
 }
 
-.Place__images img {
+.place__images img {
     width: 100%;
 }
 
-.Place__controls {
+.place__controls {
     list-style-type: none;
     margin: 20px 0 0;
     padding-left: 0;
 }
 
-.Place__controls li {
+.place__controls li {
     display: inline-block;
 }
 
-.Place__controls li:not(:last-child) {
+.place__controls li:not(:last-child) {
     margin-right: 5px;
+}
+
+.form {
+    max-width: 450px;
+}
+
+.form__list {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+.form__list-item {
+    display: block;
+    margin-bottom: 24px;
+}
+
+.form__label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form__input {
+    display: block;
+    font-family: sans-serif;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+}
+
+.form__textarea {
+    resize: none;
+}
+
+.form__input,
+.form__textarea {
+    border: 1px solid #ccc;
+}
+
+.form__attachment {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.form__attachment-type {
+    margin-left: 10px;
+}
+
+.form__attachment-add {
+    border-style: none;
+    cursor: pointer;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+.form__submit {
+    background-color: #3cca5e;
 }

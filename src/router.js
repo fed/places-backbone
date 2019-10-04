@@ -1,15 +1,21 @@
 import Backbone from 'backbone';
-import PlacesView from './views/places';
+import ListPlacesView from './views/list';
+import AddPlaceView from './views/add';
 
-const placesView = new PlacesView();
+export const listView = new ListPlacesView();
+const addView = new AddPlaceView();
 
 export default Backbone.Router.extend({
     routes: {
-        '': 'home'
+        '': 'home',
+        add: 'add'
     },
 
     home() {
-        console.log('Router#home was called!');
-        placesView.render();
+        listView.render();
+    },
+
+    add() {
+        addView.render();
     }
 });

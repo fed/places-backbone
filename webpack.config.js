@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const config = {
+module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -27,5 +27,3 @@ const config = {
         ]
     }
 };
-
-module.exports = config;
