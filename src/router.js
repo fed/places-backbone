@@ -2,9 +2,6 @@ import Backbone from 'backbone';
 import ListPlacesView from './views/list';
 import AddPlaceView from './views/add';
 
-export const listView = new ListPlacesView();
-const addView = new AddPlaceView();
-
 export default Backbone.Router.extend({
     routes: {
         '': 'home',
@@ -12,10 +9,14 @@ export default Backbone.Router.extend({
     },
 
     home() {
+        const listView = new ListPlacesView();
+
         listView.render();
     },
 
     add() {
+        const addView = new AddPlaceView();
+
         addView.render();
     }
 });

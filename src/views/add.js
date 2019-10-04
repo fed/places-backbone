@@ -2,9 +2,8 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 import _ from 'underscore';
 import Place from '../models/place';
-import { router } from '..';
-import { listView } from '../router';
 import addPlaceTpl from '../templates/add-place.tpl';
+import { router } from '..';
 
 export default Backbone.View.extend({
     el: '#root',
@@ -28,10 +27,17 @@ export default Backbone.View.extend({
             }
         };
 
-        place.save(placeDetails, {
+        // Update the model instance with the details from the form.
+        place.set(placeDetails);
+
+        // The first parameter is the attributes hash which, as in `Model#set`,
+        // should contain the attributes you'd like to change.
+        // Keys that aren't mentioned won't be altered, but a complete
+        // representation of the resource will be sent to the server.
+        // Here `null` means "sync the whole thing".
+        place.save(null, {
             success: function() {
-                console.log('success callback', place);
-                listView.update();
+                // We need to pass in `trigger: true` to also call the route function.
                 router.navigate('/', { trigger: true });
             }
         });

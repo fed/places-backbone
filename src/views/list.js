@@ -7,17 +7,13 @@ export default Backbone.View.extend({
     el: '#root',
 
     initialize() {
-        /*
-         * Alternatively, we could also do the following:
-         * this.collection.fetch({ success: this.render.bind(this) });
-         */
+        // Alternatively, we could also do the following:
+        // this.collection.on('reset', this.render.bind(this));
+        // this.collection.fetch({ reset: true });
         this.collection = new Places();
-        this.collection.on('reset', this.render.bind(this));
-        this.collection.fetch({ reset: true });
-    },
-
-    update() {
-        this.collection.fetch({ reset: true });
+        this.collection.fetch({
+            success: this.render.bind(this)
+        });
     },
 
     render() {
