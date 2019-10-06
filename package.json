@@ -2,7 +2,6 @@
   "name": "places-backbone",
   "version": "0.0.0",
   "description": "Places App (Backbone.js Remake)",
-  "main": "public/index.html",
   "license": "MIT",
   "author": {
     "name": "Federico Knüssel",
@@ -13,7 +12,6 @@
     "url": "git+https://github.com/fknussel/places-backbone.git"
   },
   "scripts": {
-    "clean": "rm public/bundle.js",
     "start": "webpack-dev-server",
     "build": "webpack -p --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
