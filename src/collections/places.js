@@ -1,11 +1,7 @@
 import Backbone from 'backbone';
-import Place from '../models/place';
 import { PLACES_ENDPOINT } from '../utils/constants';
 
 export default Backbone.Collection.extend({
-    // This basically means this collection is of type Array<Place>
-    model: Place,
-
     // API URL to hit to populate the collection, used by `collection#fetch`.
     url: PLACES_ENDPOINT,
 

@@ -1,12 +1,14 @@
 import Backbone from 'backbone';
 import ListPlacesView from './views/list';
 import AddPlaceView from './views/add';
+import PlaceDetailsView from './views/details';
 import RemovePlaceView from './views/remove';
 
 export default Backbone.Router.extend({
     routes: {
         '': 'home',
         add: 'add',
+        'view/:id': 'details',
         'remove/:id': 'remove'
     },
 
@@ -20,6 +22,12 @@ export default Backbone.Router.extend({
         const addView = new AddPlaceView();
 
         addView.render();
+    },
+
+    details(id) {
+        const detailsView = new PlaceDetailsView({ id });
+
+        detailsView.render();
     },
 
     remove(id) {

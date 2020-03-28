@@ -21,9 +21,7 @@ export default Backbone.Model.extend({
         }
     },
 
-    toggleVisited() {
-        this.set({
-            visited: !this.get('visited')
-        });
+    parse(response) {
+        return response.data;
     }
 });
